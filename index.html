@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Data Analyst Quest — 90-Day Dashboard</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#FFFFFF;--card:#F8F7F4;--hl:#E9F0EA;--ink:#2B2D2C;--mute:#6B7772;--line:#E1E6E0;--g:#3F8F60;--m1:#3F8F60;--m2:#4A86A8;--m3:#C9962F;--now:#D1495B;--empty:#E7ECE6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171F1F;--card:#1F2A2A;--hl:#243633;--ink:#E8EFEA;--mute:#98A9A3;--line:#2E3C3B;--g:#6CC48D;--m1:#5BBE82;--m2:#6BA9CB;--m3:#E3B04F;--now:#F0707F;--empty:#2A3837}}
+:root[data-theme="dark"]{--bg:#171F1F;--card:#1F2A2A;--hl:#243633;--ink:#E8EFEA;--mute:#98A9A3;--line:#2E3C3B;--g:#6CC48D;--m1:#5BBE82;--m2:#6BA9CB;--m3:#E3B04F;--now:#F0707F;--empty:#2A3837}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif}
+#cv{display:block;width:100%;height:clamp(130px,22vw,240px);image-rendering:pixelated;object-fit:cover}
+main{max-width:1000px;margin:0 auto;padding:0 18px 48px}
+.ic{width:84px;height:84px;margin:-42px 0 0 6px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:52px;position:relative}
+h1{font-weight:800;font-size:clamp(34px,7vw,56px);line-height:1.1;letter-spacing:-.02em;margin:8px 0 4px}
+.week{color:var(--g);font-size:20px;font-weight:600;margin:0 0 22px}
+.week input{font:inherit;color:var(--g);background:transparent;border:0;border-bottom:1px dashed var(--g)}
+.bar{height:10px;background:var(--empty);border-radius:6px;overflow:hidden;margin-bottom:18px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--m1),var(--m2),var(--m3));transition:width .4s}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:20px}
+.stat,.box{background:var(--card);border-radius:14px;padding:14px 16px}
+.stat b{display:block;font-size:28px;font-weight:800}
+.stat span{color:var(--mute);font-size:13px}
+.box h3,.hl{margin:0 0 12px;font-size:18px}
+.hl{background:var(--hl);border-radius:8px;padding:4px 10px;display:inline-block}
+.focus{border-left:6px solid var(--now);display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:20px}
+.focus h2{margin:0 0 2px;font-size:22px}.focus p{margin:0;color:var(--mute);font-size:14px}
+button{font:inherit;cursor:pointer;border:0;border-radius:8px;padding:10px 16px;background:var(--ink);color:var(--bg);font-weight:600}
+button.ghost{background:transparent;color:var(--mute);border:1px solid var(--line);padding:6px 12px;font-weight:400;font-size:13px}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--now);outline-offset:2px}
+.month{margin-bottom:14px}
+.month h3{display:flex;justify-content:space-between}.month h3 span{color:var(--mute);font-weight:400;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.cell{aspect-ratio:1;border-radius:8px;background:var(--empty);color:var(--mute);font-size:13px;font-weight:600;padding:0}
+.cell.done{color:#fff}
+.m1 .done{background:var(--m1)}.m2 .done{background:var(--m2)}.m3 .done{background:var(--m3)}
+.cell.now{box-shadow:0 0 0 3px var(--now);color:var(--ink)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:14px}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.ch b{font-size:18px}.ch button{padding:4px 12px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal em{font-style:normal;color:var(--mute);font-size:12px}
+.dc{aspect-ratio:1;background:var(--bg);color:var(--ink);padding:2px;border-radius:8px;font-weight:400;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px;line-height:1.1}
+.dc i{font-style:normal;font-size:10px;color:var(--g);min-height:11px}
+.dc.plan{background:var(--hl)}.dc.ok{box-shadow:inset 0 -3px 0 var(--m1)}.dc.sel{outline:2px solid var(--now)}
+.ed label{display:block;color:var(--mute);font-size:13px;margin-top:10px}
+.ed input,.ed textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px}
+.ed textarea{min-height:110px;resize:vertical}
+svg.chart{width:100%;height:auto;display:block}
+svg.chart text{fill:var(--mute);font-size:11px;text-anchor:middle}
+.box label.ck{display:flex;gap:10px;align-items:center;padding:5px 0;cursor:pointer}
+.box input[type=checkbox]{width:18px;height:18px;accent-color:var(--m1)}
+.counter{display:flex;align-items:center;gap:14px}.counter b{font-size:40px;min-width:2ch}.counter button{width:40px;padding:8px 0}
+.foot{margin-top:18px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--mute);font-size:13px}
+</style>
+</head>
+<body>
+<canvas id="cv" role="img" aria-label="Pixel-art garden cover"></canvas>
+<main>
+<div class="ic" aria-hidden="true">🌿</div>
+<h1 id="hd">Data Analyst Quest</h1>
+<p class="week">Start date: <input type="date" id="st" aria-label="Start date"> · <span id="wk"></span></p>
+<div class="bar" role="progressbar" aria-label="Overall progress" aria-valuemin="0" aria-valuemax="100" id="pb"><i id="pf"></i></div>
+<div class="stats">
+<div class="stat"><b id="s1">0%</b><span>Overall progress</span></div>
+<div class="stat"><b id="s2">0</b><span>Days completed</span></div>
+<div class="stat"><b id="s3">0</b><span>Current run (days)</span></div>
+<div class="stat"><b id="s5">0</b><span>Study hours</span></div>
+</div>
+<div class="box focus"><div><h2 id="ft">—</h2><p id="fm">—</p></div><button id="mark">Mark done</button></div>
+<div id="months"></div>
+<div class="two">
+<div class="box"><div class="ch"><button class="ghost" id="pv" aria-label="Previous month">‹</button><b id="cm"></b><button class="ghost" id="nx" aria-label="Next month">›</button></div><div class="cal" id="cal"></div></div>
+<div class="box ed"><h3 class="hl">Daily journal</h3><div id="jd" style="color:var(--mute)"></div>
+<label for="jh">Hours studied</label><input id="jh" type="number" min="0" max="16" step="0.5">
+<label for="jn">What I learned, what was hard, what's next</label><textarea id="jn"></textarea></div>
+</div>
+<div class="two">
+<div class="box"><h3>Study hours · last 14 days</h3><div id="c1"></div></div>
+<div class="box"><h3>Study hours · per week</h3><div id="c2"></div></div>
+</div>
+<div class="two">
+<div class="box"><h3>Portfolio projects</h3><div id="proj"></div></div>
+<div class="box"><h3>Applications sent</h3><div class="counter"><button id="dn" aria-label="Remove one application">−</button><b id="ap">0</b><button id="up" aria-label="Add one application">+</button></div><p style="color:var(--mute);margin:10px 0 0">Goal: 15 by Day 86.</p></div>
+</div>
+<div class="foot"><span>Rule 5: don't wait until Day 90 to apply. Progress is saved in this browser.</span><button class="ghost" id="reset">Reset all</button></div>
+</main>
+<script>
+var T="Data Fundamentals + Excel basics|Cleaning, sorting, filtering|Excel formulas|Pivot tables|Charts + basic dashboard|Mini sales analysis|Review + quiz|SQL SELECT|WHERE|ORDER BY|GROUP BY|Aggregate functions|SQL practice|Review|JOIN basics|INNER JOIN|LEFT JOIN|CASE WHEN|Subqueries|Advanced SQL practice|SQL mini project|Power BI interface|Import data|Power Query|Cleaning data|Basic visuals|KPI cards + filters|Dashboard practice|Finish dashboard|Month 1 review|Python basics|Variables + data types|Lists + dictionaries|Conditions|Loops|Functions|Python practice|DataFrames|Reading CSV|Selecting + filtering|Missing values|Groupby|Merge|Pandas practice|Chart selection|Matplotlib basics|Bar charts|Line charts|Distributions|Business storytelling|Visualization project|Data modeling|Relationships|DAX basics|Measures|Calculated columns|Advanced dashboard|Dashboard polish|Portfolio documentation|Month 2 review|Choose dataset|Data cleaning|Exploratory analysis|Python/Pandas analysis|Visualization|Business insights|Finalize project|AI for data cleaning|AI for SQL|AI for Python|AI-assisted insights|AI dashboard planning|Verify AI outputs|AI-assisted mini project|Create CV|Create LinkedIn|Create GitHub|Upload Project 1|Upload Project 2|Upload Project 3|Portfolio review|Find target job titles|Prepare applications|Apply to 5 jobs|Apply to 5 jobs|Apply to 5 jobs|Freelance applications|Interview practice|SQL interview practice|Full review + job search routine".split("|");
+var P=["Sales Dashboard (Excel)","E-commerce SQL Analysis (SQL)","E-commerce Dashboard (Power BI)","Customer Analysis (Python/Pandas)","AI-assisted Analysis (AI + Data)"];
+var M=[["Month 1 · Foundation",0],["Month 2 · Analysis Skills",30],["Month 3 · Portfolio + Job",60]];
+var MN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+function $(i){return document.getElementById(i)}
+function ds(t){return t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(t.getDate()).padStart(2,"0")}
+function pd(s){var a=s.split("-");return new Date(+a[0],a[1]-1,+a[2])}
+var today=ds(new Date()),K="daq90-v2",S={d:[],p:[],a:0,s:today,j:{}};
+try{var r=localStorage.getItem(K);if(r)S=JSON.parse(r)}catch(e){}
+if(!S.d||S.d.length!==90){S.d=[];for(var i=0;i<90;i++)S.d.push(false)}
+S.p=S.p||[];S.a=S.a||0;S.s=S.s||today;S.j=S.j||{};
+var sel=today,cy=pd(today).getFullYear(),cm=pd(today).getMonth();
+function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}}
+function di(s){return Math.round((pd(s)-pd(S.s))/864e5)}
+function nowIdx(){var i=S.d.indexOf(false);return i<0?89:i}
+function cover(){var c=$("cv"),W=128,H=26,x;c.width=W;c.height=H;x=c.getContext("2d");var sd=7;
+function R(){sd=sd*16807%2147483647;return sd/2147483647}
+function pick(a){return a[Math.floor(R()*a.length)]}
+var wl=["#4F7378","#587F83","#43686D"],pl=["#A9C0BC","#B8CCC6","#9DB6B2"],dk=["#46666B","#3E5F64"],gr=["#2F6B3A","#3F8A4A","#5BAA5E","#7CC36E"],blk={};
+for(var py=0;py<H;py++)for(var px=0;px<W;px++){var k=(px>>2)+"_"+(py>>2);if(!blk[k])blk[k]=R();var b=blk[k],col;
+if(py>=23)col="#8CA39E";else if(px<45)col=wl[Math.floor(b*3)];else if(px<100)col=pl[Math.floor(b*3)];else col=dk[Math.floor(b*2)];
+if(px>=62&&px<96&&py>=14&&py<20)col=(px+py)%2?"#E4ECE6":"#B8CCC6";
+if(px>=70&&px<73&&py<23)col="#8A8B7C";
+if(px>=90&&px<95&&py>=8&&py<22)col="#5B94B5";
+if(px>=72&&px<88&&py<6&&(px+py)%2)col=pick(gr);
+var e1=Math.pow((px-24)/24,2)+Math.pow((py-21)/13,2),e2=Math.pow((px-58)/17,2)+Math.pow((py-10)/15,2);
+if((e1<1||e2<1)&&R()>.1){col=pick(gr);if(R()>.95)col="#E8C547"}
+x.fillStyle=col;x.fillRect(px,py,1,1)}}
+function build(){var h="";
+M.forEach(function(m,mi){h+='<section class="box month m'+(mi+1)+'"><h3>'+m[0]+'<span id="mc'+mi+'"></span></h3><div class="grid">';
+for(var i=m[1];i<m[1]+30;i++)h+='<button class="cell" data-i="'+i+'" title="Day '+(i+1)+': '+T[i]+'" aria-label="Day '+(i+1)+': '+T[i]+'">'+(i+1)+'</button>';
+h+='</div></section>'});
+$("months").innerHTML=h;
+$("proj").innerHTML=P.map(function(n,i){return '<label class="ck"><input type="checkbox" data-p="'+i+'"> '+n+'</label>'}).join("")}
+function hrs(s){return S.j[s]&&S.j[s].h?+S.j[s].h:0}
+function bars(id,lab,val,col){var n=val.length,mx=Math.max(4,Math.max.apply(null,val)),st=560/n,h="";
+for(var i=0;i<n;i++){var v=val[i],bh=v/mx*100;
+h+='<rect x="'+(i*st+4)+'" y="'+(115-bh)+'" width="'+(st-8)+'" height="'+Math.max(bh,2)+'" rx="3" fill="var('+col+')" opacity="'+(v?1:.25)+'"><title>'+lab[i]+': '+v+' h</title></rect>';
+if(v)h+='<text x="'+(i*st+st/2)+'" y="'+(111-bh)+'">'+v+'</text>';
+h+='<text x="'+(i*st+st/2)+'" y="132">'+lab[i]+'</text>'}
+$(id).innerHTML='<svg class="chart" viewBox="0 0 560 140" role="img" aria-label="Study hours chart">'+h+'</svg>'}
+function charts(){var l=[],v=[],t=pd(today),i;
+for(i=13;i>=0;i--){var d=new Date(t.getFullYear(),t.getMonth(),t.getDate()-i);l.push(d.getDate());v.push(hrs(ds(d)))}
+bars("c1",l,v,"--m1");
+var w=[],wl=[];for(i=0;i<12;i++){w.push(0);wl.push("W"+(i+1))}
+for(var s in S.j){var k=Math.floor(di(s)/7);if(k>=0&&k<12)w[k]+=hrs(s)}
+bars("c2",wl,w.map(function(x){return Math.round(x*10)/10}),"--m2")}
+function calr(){var f=new Date(cy,cm,1),off=(f.getDay()+6)%7,n=new Date(cy,cm+1,0).getDate(),h="";
+$("cm").textContent=MN[cm]+" "+cy;
+["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach(function(x){h+="<em>"+x+"</em>"});
+for(var i=0;i<off;i++)h+="<span></span>";
+for(var d=1;d<=n;d++){var s=ds(new Date(cy,cm,d)),k=di(s),p=k>=0&&k<90,e=hrs(s);
+h+='<button class="dc'+(p?" plan":"")+(p&&S.d[k]?" ok":"")+(s===sel?" sel":"")+'" data-s="'+s+'"'+(p?' title="Day '+(k+1)+': '+T[k]+'"':"")+'>'+d+'<i>'+(e?e+"h":(S.j[s]?"•":""))+'</i></button>'}
+$("cal").innerHTML=h}
+function editor(){var k=di(sel),j=S.j[sel]||{};
+$("jd").textContent=pd(sel).toDateString()+(k>=0&&k<90?" · Day "+(k+1)+": "+T[k]:"");
+$("jh").value=j.h||"";$("jn").value=j.n||""}
+function render(){var n=0,c=document.querySelectorAll(".cell"),ni=nowIdx(),all=S.d.indexOf(false)<0,i;
+for(i=0;i<90;i++){if(S.d[i])n++;c[i].classList.toggle("done",S.d[i]);c[i].classList.toggle("now",!all&&i===ni);c[i].setAttribute("aria-pressed",S.d[i])}
+var run=0,last=-1,th=0;for(i=89;i>=0;i--)if(S.d[i]){last=i;break}
+if(last>=0)for(i=last;i>=0&&S.d[i];i--)run++;
+for(var s in S.j)th+=hrs(s);
+var pct=Math.round(n/90*100),tk=di(today);
+$("st").value=S.s;$("wk").textContent=tk<0?"starts soon":tk>89?"90 days finished":"Week "+(Math.floor(tk/7)+1)+" of 12";
+$("pf").style.width=pct+"%";$("pb").setAttribute("aria-valuenow",pct);
+$("s1").textContent=pct+"%";$("s2").textContent=n;$("s3").textContent=run;$("s5").textContent=Math.round(th*10)/10;
+$("ft").textContent=all?"Quest complete":"Day "+(ni+1)+": "+T[ni];
+$("fm").textContent=all?"Review your portfolio and keep your job search routine going.":M[Math.floor(ni/30)][0];
+$("mark").style.display=all?"none":"";
+M.forEach(function(m,mi){var k=0;for(var j=m[1];j<m[1]+30;j++)if(S.d[j])k++;$("mc"+mi).textContent=k+" / 30"});
+document.querySelectorAll("[data-p]").forEach(function(b){b.checked=S.p.indexOf(+b.dataset.p)>-1});
+$("ap").textContent=S.a;calr();charts()}
+cover();build();render();editor();
+$("months").addEventListener("click",function(e){var b=e.target.closest(".cell");if(!b)return;var i=+b.dataset.i;S.d[i]=!S.d[i];save();render()});
+$("mark").onclick=function(){S.d[nowIdx()]=true;save();render()};
+$("cal").addEventListener("click",function(e){var b=e.target.closest(".dc");if(!b)return;sel=b.dataset.s;calr();editor()});
+$("pv").onclick=function(){cm--;if(cm<0){cm=11;cy--}calr()};
+$("nx").onclick=function(){cm++;if(cm>11){cm=0;cy++}calr()};
+function jsave(){var h=parseFloat($("jh").value)||0,t=$("jn").value;if(h||t.trim())S.j[sel]={h:h,n:t};else delete S.j[sel];save();$("s5").textContent=Math.round(Object.keys(S.j).reduce(function(a,s){return a+hrs(s)},0)*10)/10;calr();charts()}
+$("jh").oninput=jsave;$("jn").oninput=jsave;
+$("st").onchange=function(){if(this.value){S.s=this.value;save();render();editor()}};
+$("proj").addEventListener("change",function(e){var i=+e.target.dataset.p,k=S.p.indexOf(i);if(e.target.checked&&k<0)S.p.push(i);if(!e.target.checked&&k>-1)S.p.splice(k,1);save()});
+$("up").onclick=function(){S.a++;save();render()};
+$("dn").onclick=function(){if(S.a>0)S.a--;save();render()};
+$("reset").onclick=function(){if(confirm("Reset all progress and journal entries? This cannot be undone.")){S={d:[],p:[],a:0,s:today,j:{}};for(var i=0;i<90;i++)S.d.push(false);save();render();editor()}};
+</script>
+</body>
+</html>
