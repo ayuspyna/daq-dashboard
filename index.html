@@ -13,49 +13,56 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif}
-#cv{display:block;width:100%;height:clamp(130px,22vw,240px);image-rendering:pixelated;object-fit:cover}
-main{max-width:1000px;margin:0 auto;padding:0 18px 48px}
-.ic{width:84px;height:84px;margin:-42px 0 0 6px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:52px;position:relative}
-h1{font-weight:800;font-size:clamp(34px,7vw,56px);line-height:1.1;letter-spacing:-.02em;margin:8px 0 4px}
-.week{color:var(--g);font-size:20px;font-weight:600;margin:0 0 22px}
+#cv{display:block;width:100%;height:clamp(56px,9vw,84px);image-rendering:pixelated;object-fit:cover}
+main{max-width:1000px;margin:0 auto;padding:0 18px 20px}
+.ic{width:52px;height:52px;margin:-26px 0 0 4px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:32px;position:relative}
+h1{font-weight:800;font-size:clamp(26px,5vw,36px);line-height:1.1;letter-spacing:-.02em;margin:4px 0 2px}
+.week{color:var(--g);font-size:16px;font-weight:600;margin:0 0 10px}
 .week input{font:inherit;color:var(--g);background:transparent;border:0;border-bottom:1px dashed var(--g)}
-.bar{height:10px;background:var(--empty);border-radius:6px;overflow:hidden;margin-bottom:18px}
+.bar{height:8px;background:var(--empty);border-radius:6px;overflow:hidden;margin-bottom:10px}
 .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--m1),var(--m2),var(--m3));transition:width .4s}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:20px}
-.stat,.box{background:var(--card);border-radius:14px;padding:14px 16px}
-.stat b{display:block;font-size:28px;font-weight:800}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:12px}
+.stat,.box{background:var(--card);border-radius:14px;padding:12px 16px}
+.stat b{display:block;font-size:26px;font-weight:800;line-height:1.2}
 .stat span{color:var(--mute);font-size:13px}
 .box h3,.hl{margin:0 0 12px;font-size:18px}
 .hl{background:var(--hl);border-radius:8px;padding:4px 10px;display:inline-block}
-.focus{border-left:6px solid var(--now);display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:20px}
+.focus{border-left:6px solid var(--now);display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
 .focus h2{margin:0 0 2px;font-size:22px}.focus p{margin:0;color:var(--mute);font-size:14px}
 button{font:inherit;cursor:pointer;border:0;border-radius:8px;padding:10px 16px;background:var(--ink);color:var(--bg);font-weight:600}
 button.ghost{background:transparent;color:var(--mute);border:1px solid var(--line);padding:6px 12px;font-weight:400;font-size:13px}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--now);outline-offset:2px}
-.month{margin-bottom:14px}
+.month{margin-bottom:10px}
 .month h3{display:flex;justify-content:space-between}.month h3 span{color:var(--mute);font-weight:400;font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
-.cell{aspect-ratio:1;border-radius:8px;background:var(--empty);color:var(--mute);font-size:13px;font-weight:600;padding:0}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.cell{height:26px;border-radius:8px;background:var(--empty);color:var(--mute);font-size:13px;font-weight:600;padding:0}
 .cell.done{color:#fff}
 .m1 .done{background:var(--m1)}.m2 .done{background:var(--m2)}.m3 .done{background:var(--m3)}
 .cell.now{box-shadow:0 0 0 3px var(--now);color:var(--ink)}
-.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-bottom:14px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-bottom:12px}
 .ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .ch b{font-size:18px}.ch button{padding:4px 12px}
 .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
 .cal em{font-style:normal;color:var(--mute);font-size:12px}
-.dc{aspect-ratio:1;background:var(--bg);color:var(--ink);padding:2px;border-radius:8px;font-weight:400;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px;line-height:1.1}
+.dc{height:40px;background:var(--bg);color:var(--ink);padding:2px;border-radius:8px;font-weight:400;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px;line-height:1.1}
 .dc i{font-style:normal;font-size:10px;color:var(--g);min-height:11px}
 .dc.plan{background:var(--hl)}.dc.ok{box-shadow:inset 0 -3px 0 var(--m1)}.dc.sel{outline:2px solid var(--now)}
 .ed label{display:block;color:var(--mute);font-size:13px;margin-top:10px}
 .ed input,.ed textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px}
-.ed textarea{min-height:110px;resize:vertical}
+.ed textarea{min-height:90px;resize:vertical}
 svg.chart{width:100%;height:auto;display:block}
 svg.chart text{fill:var(--mute);font-size:11px;text-anchor:middle}
 .box label.ck{display:flex;gap:10px;align-items:center;padding:5px 0;cursor:pointer}
 .box input[type=checkbox]{width:18px;height:18px;accent-color:var(--m1)}
 .counter{display:flex;align-items:center;gap:14px}.counter b{font-size:40px;min-width:2ch}.counter button{width:40px;padding:8px 0}
-.foot{margin-top:18px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--mute);font-size:13px}
+.foot{margin-top:10px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--mute);font-size:13px}
+
+.month.box{padding:10px 14px}.month h3{margin:0 0 8px;font-size:16px}
+
+.tabs{display:flex;gap:6px;margin:0 0 12px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{background:transparent;color:var(--mute);border-radius:8px 8px 0 0;padding:9px 16px;font-weight:600;border-bottom:3px solid transparent;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--now)}
+.panel{display:none}.panel.on{display:block}
 </style>
 </head>
 <body>
@@ -65,6 +72,13 @@ svg.chart text{fill:var(--mute);font-size:11px;text-anchor:middle}
 <h1 id="hd">Data Analyst Quest</h1>
 <p class="week">Start date: <input type="date" id="st" aria-label="Start date"> · <span id="wk"></span></p>
 <div class="bar" role="progressbar" aria-label="Overall progress" aria-valuemin="0" aria-valuemax="100" id="pb"><i id="pf"></i></div>
+<div class="tabs" role="tablist" aria-label="Dashboard sections">
+<button class="tab" role="tab" id="t-today" aria-controls="p-today" data-t="today">Today</button>
+<button class="tab" role="tab" id="t-days" aria-controls="p-days" data-t="days">90 Days</button>
+<button class="tab" role="tab" id="t-journal" aria-controls="p-journal" data-t="journal">Journal</button>
+<button class="tab" role="tab" id="t-charts" aria-controls="p-charts" data-t="charts">Charts</button>
+</div>
+<div class="panel" role="tabpanel" id="p-today" aria-labelledby="t-today">
 <div class="stats">
 <div class="stat"><b id="s1">0%</b><span>Overall progress</span></div>
 <div class="stat"><b id="s2">0</b><span>Days completed</span></div>
@@ -72,20 +86,27 @@ svg.chart text{fill:var(--mute);font-size:11px;text-anchor:middle}
 <div class="stat"><b id="s5">0</b><span>Study hours</span></div>
 </div>
 <div class="box focus"><div><h2 id="ft">—</h2><p id="fm">—</p></div><button id="mark">Mark done</button></div>
+<div class="two">
+<div class="box"><h3>Portfolio projects</h3><div id="proj"></div></div>
+<div class="box"><h3>Applications sent</h3><div class="counter"><button id="dn" aria-label="Remove one application">−</button><b id="ap">0</b><button id="up" aria-label="Add one application">+</button></div><p style="color:var(--mute);margin:10px 0 0">Goal: 15 by Day 86.</p></div>
+</div>
+</div>
+<div class="panel" role="tabpanel" id="p-days" aria-labelledby="t-days">
 <div id="months"></div>
+</div>
+<div class="panel" role="tabpanel" id="p-journal" aria-labelledby="t-journal">
 <div class="two">
 <div class="box"><div class="ch"><button class="ghost" id="pv" aria-label="Previous month">‹</button><b id="cm"></b><button class="ghost" id="nx" aria-label="Next month">›</button></div><div class="cal" id="cal"></div></div>
 <div class="box ed"><h3 class="hl">Daily journal</h3><div id="jd" style="color:var(--mute)"></div>
 <label for="jh">Hours studied</label><input id="jh" type="number" min="0" max="16" step="0.5">
 <label for="jn">What I learned, what was hard, what's next</label><textarea id="jn"></textarea></div>
 </div>
+</div>
+<div class="panel" role="tabpanel" id="p-charts" aria-labelledby="t-charts">
 <div class="two">
 <div class="box"><h3>Study hours · last 14 days</h3><div id="c1"></div></div>
 <div class="box"><h3>Study hours · per week</h3><div id="c2"></div></div>
 </div>
-<div class="two">
-<div class="box"><h3>Portfolio projects</h3><div id="proj"></div></div>
-<div class="box"><h3>Applications sent</h3><div class="counter"><button id="dn" aria-label="Remove one application">−</button><b id="ap">0</b><button id="up" aria-label="Add one application">+</button></div><p style="color:var(--mute);margin:10px 0 0">Goal: 15 by Day 86.</p></div>
 </div>
 <div class="foot"><span>Rule 5: don't wait until Day 90 to apply. Progress is saved in this browser.</span><button class="ghost" id="reset">Reset all</button></div>
 </main>
@@ -175,6 +196,16 @@ $("proj").addEventListener("change",function(e){var i=+e.target.dataset.p,k=S.p.
 $("up").onclick=function(){S.a++;save();render()};
 $("dn").onclick=function(){if(S.a>0)S.a--;save();render()};
 $("reset").onclick=function(){if(confirm("Reset all progress and journal entries? This cannot be undone.")){S={d:[],p:[],a:0,s:today,j:{}};for(var i=0;i<90;i++)S.d.push(false);save();render();editor()}};
+
+var TK="daq90-tab",TABS=["today","days","journal","charts"];
+function showTab(n){if(TABS.indexOf(n)<0)n="today";
+TABS.forEach(function(t){var on=t===n;$("p-"+t).classList.toggle("on",on);$("t-"+t).setAttribute("aria-selected",on);$("t-"+t).tabIndex=on?0:-1});
+try{localStorage.setItem(TK,n)}catch(e){}}
+document.querySelector(".tabs").addEventListener("click",function(e){var b=e.target.closest(".tab");if(b)showTab(b.dataset.t)});
+document.querySelector(".tabs").addEventListener("keydown",function(e){var i=TABS.indexOf(e.target.dataset.t);if(i<0)return;
+if(e.key==="ArrowRight"||e.key==="ArrowLeft"){i=(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length;showTab(TABS[i]);$("t-"+TABS[i]).focus();e.preventDefault()}});
+var t0="today";try{t0=localStorage.getItem(TK)||"today"}catch(e){}
+showTab(t0);
 </script>
 </body>
 </html>
